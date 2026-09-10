@@ -8,6 +8,8 @@
 
 ## Overview
 
+![Nate OSINT Banner](assets/ss.png)
+
 Nate OSINT is designed as a modular and extensible OSINT toolkit for conducting investigations using publicly available information.
 
 The project aims to simplify common OSINT workflows by bringing multiple reconnaissance, discovery, analysis, and data-correlation capabilities into a single toolkit.
