@@ -141,23 +141,10 @@ Nate OSINT can be used for legitimate activities such as:
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/nate-osint.git
+git clone https://github.com/bhottu/Nate-OSINT.git
 cd nate-osint
 ```
 
-Install the required dependencies:
-
-```bash
-# Add installation instructions here
-```
-
-Run Nate OSINT:
-
-```bash
-# Add usage command here
-```
-
-> Installation and usage instructions will be expanded as the project develops.
 
 ---
 
@@ -406,6 +393,6 @@ Nate OSINT is built around a simple principle:
 
 ---
 
-## Nate OSINT
+## Nate OSINT by Nate Nasution
 
 **Discover. Investigate. Correlate. Understand.**
