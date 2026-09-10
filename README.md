@@ -20,7 +20,7 @@ Nate OSINT is built with extensibility in mind, allowing additional tools, modul
 
 ## Features
 
-### 🔎 Information Discovery
+### Information Discovery
 
 - Username and alias enumeration
 - Public profile discovery
@@ -29,7 +29,7 @@ Nate OSINT is built with extensibility in mind, allowing additional tools, modul
 - Public information gathering
 - Digital footprint discovery
 
-### 🌐 Domain & Infrastructure Reconnaissance
+### Domain & Infrastructure Reconnaissance
 
 - Domain information gathering
 - DNS reconnaissance
@@ -40,7 +40,7 @@ Nate OSINT is built with extensibility in mind, allowing additional tools, modul
 - Infrastructure footprint analysis
 - URL investigation
 
-### 👤 Digital Footprint Analysis
+### Digital Footprint Analysis
 
 - Username searching across public platforms
 - Alias correlation
@@ -49,7 +49,7 @@ Nate OSINT is built with extensibility in mind, allowing additional tools, modul
 - Cross-source information correlation
 - Public identity indicators
 
-### 📄 Metadata & Public Data Analysis
+### Metadata & Public Data Analysis
 
 - Metadata analysis
 - Public document investigation
@@ -58,7 +58,7 @@ Nate OSINT is built with extensibility in mind, allowing additional tools, modul
 - Publicly available data correlation
 - Structured information extraction
 
-### ⚙️ Automation
+### Automation
 
 Nate OSINT aims to automate repetitive OSINT tasks while keeping individual modules simple, maintainable, and extensible.
 
