@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+:root { --paper: #07110c; --ink: #b8ffcf; --coral: #39ff88; --sand: #0d2117; }
+@theme inline { --color-paper: var(--paper); --color-ink: var(--ink); --color-coral: var(--coral); --color-sand: var(--sand); --font-display: 'JetBrains Mono', monospace; --font-sans: 'IBM Plex Mono', monospace; }
+@custom-variant dark (&:where(.dark, .dark *));
+
+body { background-image: linear-gradient(rgba(57, 255, 136, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(57, 255, 136, .035) 1px, transparent 1px); background-size: 32px 32px; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 10; background: repeating-linear-gradient(0deg, transparent 0, transparent 3px, rgba(57, 255, 136, .018) 4px); }
+::selection { color: var(--paper); background: var(--coral); }
+@media (prefers-reduced-motion: no-preference) { body { animation: appear .45s ease-out both; } }
+@keyframes appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.action { @apply rounded-none border border-coral/35 bg-paper/70 px-3 py-2 text-sm font-semibold uppercase tracking-wider text-coral transition hover:-translate-y-0.5 hover:bg-coral hover:text-paper dark:border-coral/35; }
+.brand-credit { font-size: 8px; line-height: 1.2; }
+input, button, label { font-family: inherit; }
+@media print { nav, footer, .action, #map { display: none !important; } body { background: white; color: black; } }
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
