@@ -20,6 +20,51 @@ Nate OSINT is built with extensibility in mind, allowing additional tools, modul
 
 ## Features
 
+### Image Intelligence (Geolocation)
+
+Nate OSINT includes an Image Intelligence module designed to analyze images and extract useful information that may help identify their origin, context, or location.
+
+Potential capabilities include:
+
+- Image metadata and EXIF extraction
+- GPS coordinate extraction when location metadata is available
+- Camera and device metadata analysis
+- Timestamp and image property analysis
+- Reverse-image search integration
+- Visual landmark and location recognition
+- Geolocation estimation from visual clues
+- Scene and environment analysis
+- Text extraction using OCR
+- Object and landmark identification
+- Image-source and provenance analysis
+- Correlation of image findings with other OSINT sources
+
+The geolocation system can use multiple indicators to estimate where an image may have been captured, including:
+
+```text
+Image
+  │
+  ├── EXIF Metadata
+  │     └── GPS Coordinates
+  │
+  ├── Visual Analysis
+  │     ├── Landmarks
+  │     ├── Buildings
+  │     ├── Roads
+  │     ├── Landscape
+  │     └── Environmental Clues
+  │
+  ├── OCR
+  │     └── Signs, Addresses & Text
+  │
+  └── External OSINT Sources
+        │
+        ▼
+   Location Analysis
+        │
+        ▼
+  Estimated Location
+
 ### Information Discovery
 
 - Username and alias enumeration
