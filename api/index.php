@@ -1,5 +1,9 @@
 <?php
 
+putenv('LOG_CHANNEL=stderr');
+$_ENV['LOG_CHANNEL'] = 'stderr';
+$_SERVER['LOG_CHANNEL'] = 'stderr';
+
 try {
     require __DIR__ . '/../public/index.php';
 } catch (\Throwable $e) {
