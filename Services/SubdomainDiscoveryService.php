@@ -17,6 +17,28 @@ class SubdomainDiscoveryService
         });
     }
 
+    public function getSubdomains(): Collection
+    {
+        $subdomains = [];
+        
+        // Source: Certificate Transparency
+        foreach (Cache::get('ct_subdomains') ?? [] as $hostname) {
+            if (!empty($hostname)) {
+                $subdomains[] = ['hostname' => $hostname, 'source' => 'Certificate Transparency'];
+            }
+        }
+
+        // Source: Public DNS datasets
+        foreach (Cache::get('dns_subdomains') ?? [] as $hostname) {
+            if (!empty($hostname)) {
+                $subdomains[] = ['hostname' => $hostname, 'source' => 'Public DNS'];
+            }
+        }
+
+        // Sort and deduplicate
+        return collect($subdomains)->sort()->unique()->values();
+    }
+
     public function discoverSubdomains(): Collection
     {
         $subdomains = [];
