@@ -14,11 +14,15 @@ use Illuminate\Support\Str;
  * ================================================
  */
 
-Route::get('/debug-session', function () {
+Route::get('/debug-session', function (\Illuminate\Http\Request $request) {
     return response()->json([
         'session_id' => session()->getId(),
         'csrf_token' => csrf_token(),
-        'session_data' => session()->all(),
+        'cookie_names' => array_keys($request->cookies->all()),
+        'session_cookie_config' => config('session.cookie'),
+        'session_driver' => config('session.driver'),
+        'session_secure' => config('session.secure'),
+        'session_domain' => config('session.domain'),
     ]);
 });
 
