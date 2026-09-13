@@ -23,6 +23,7 @@ Route::get('/debug-session', function (\Illuminate\Http\Request $request) {
         'session_driver' => config('session.driver'),
         'session_secure' => config('session.secure'),
         'session_domain' => config('session.domain'),
+                            'db_default' => config('database.default'),
     ]);
 });
 
