@@ -144,9 +144,9 @@ return [
     | your application, but you're free to change this when necessary.
     |
     */
-
-    'path' => env('SESSION_PATH', '/'),
-
+    /*
+    'path' => env('SESSION_PATH', '/'), */
+    'path' => '/',
     /*
     |--------------------------------------------------------------------------
     | Session Cookie Domain
@@ -157,9 +157,10 @@ return [
     | domain without subdomains. Typically, this shouldn't be changed.
     |
     */
-
+    /*
     'domain' => env('SESSION_DOMAIN'),
-
+     */
+    'domain' => null,
     /*
     |--------------------------------------------------------------------------
     | HTTPS Only Cookies
@@ -170,9 +171,10 @@ return [
     | the cookie from being sent to you when it can't be done securely.
     |
     */
-
+    /*
     'secure' => env('SESSION_SECURE_COOKIE'),
-
+    */
+    'secure' => true,
     /*
     |--------------------------------------------------------------------------
     | HTTP Access Only
@@ -183,9 +185,10 @@ return [
     | the HTTP protocol. It's unlikely you should disable this option.
     |
     */
-
+     /*
     'http_only' => env('SESSION_HTTP_ONLY', true),
-
+    /*
+    'http_only' => true,
     /*
     |--------------------------------------------------------------------------
     | Same-Site Cookies
@@ -200,9 +203,10 @@ return [
     | Supported: "lax", "strict", "none", null
     |
     */
-
+    /*
     'same_site' => env('SESSION_SAME_SITE', 'lax'),
-
+    */
+    'same_site' => 'lax',
     /*
     |--------------------------------------------------------------------------
     | Partitioned Cookies
