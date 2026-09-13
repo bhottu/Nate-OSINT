@@ -14,6 +14,14 @@ use Illuminate\Support\Str;
  * ================================================
  */
 
+Route::get('/debug-session', function () {
+    return response()->json([
+        'session_id' => session()->getId(),
+        'csrf_token' => csrf_token(),
+        'session_data' => session()->all(),
+    ]);
+});
+
 Route::get('/', fn () => view('welcome'))->name('home');
 Route::get('/exif', [ExifController::class, 'index'])->name('exif.index');
 Route::post('/extract', [ExifController::class, 'extract'])->name('extract');
