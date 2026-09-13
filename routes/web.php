@@ -5,6 +5,7 @@ use App\Http\Controllers\PhoneIntelligenceController;
 use App\Http\Controllers\ReversePhoneOSINTController;
 use App\Http\Controllers\SecurityInspectorController;
 use App\Http\Controllers\SocialAccountCorrelationController;
+use App\Http\Controllers\DomainIntelligenceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -23,7 +24,7 @@ Route::get('/debug-session', function (\Illuminate\Http\Request $request) {
         'session_driver' => config('session.driver'),
         'session_secure' => config('session.secure'),
         'session_domain' => config('session.domain'),
-                            'db_default' => config('database.default'),
+        'db_default' => config('database.default'),
     ]);
 });
 
@@ -40,11 +41,6 @@ Route::get('/reverse-phone-osint', [ReversePhoneOSINTController::class, 'index']
 Route::post('/reverse-phone-osint/scan', [ReversePhoneOSINTController::class, 'scan'])->middleware('throttle:5,1')->name('reverse-phone.scan');
 Route::get('/social-account-correlation', [SocialAccountCorrelationController::class, 'index'])->name('social-correlation.index');
 Route::post('/social-account-correlation/scan', [SocialAccountCorrelationController::class, 'scan'])->middleware('throttle:5,1')->name('social-correlation.scan');
-/**
- * ================================================
- * Note : for domain intelligence still not working
- * ================================================
- */
 
 Route::get('/privacy', [ExifController::class, 'privacy'])->name('privacy');
 Route::get('/tools/{tool}', fn (string $tool) => view('tools.placeholder', [
@@ -53,123 +49,15 @@ Route::get('/tools/{tool}', fn (string $tool) => view('tools.placeholder', [
 
 /**
  * ================================================
- * Domain Intelligence: Subdomain Discovery Routes - 2026-09-03
+ * Domain Intelligence - 2026-09-13
+ * Passive OSINT: DNS, subdomains, certificates, TLS, HTTP.
  * ================================================
  */
-Route::get('/subdomains', function () {
-    $service = new App\Services\SubdomainDiscoveryService();
-    return collect($service->discoverSubdomains());
-})->name('subdomains.list');
-
-Route::get('/subdomains/analyze/{scan}', function ($scan) {
-    $subdomains = $service = new App\Services\SubdomainDiscoveryService();
-    $subdomains->analyzeSubdomains(DB::table('domain_dns_records')->where('hostname', $scan->hostname)->pluck('value')->toArray());
-    
-    return view('security.result', [
-        'scan' => $scan,
-        'report' => ['subdomain_count' => count($subdomains)],
-    ]);
-})->name('subdomains.analyze');
-/**
- * ================================================
- * Domain Intelligence: Certificate Transparency Routes - 2026-09-03
- * ================================================
- */
-Route::get('/certificates', function () {
-    $service = new App\Services\SubdomainDiscoveryService();
-    return collect($service->discoverSubdomains())->take(10);
-})->name('certificates.list');
-
-Route::get('/certificate-transparency/{scan}', function ($scan) {
-    $certificates = new App\Services\SubdomainDiscoveryService();
-    $certificates->analyzeSubdomains(DB::table('domain_dns_records')->where('hostname', $scan->hostname)->pluck('value')->toArray());
-    
-    return view('security.result', [
-        'scan' => $scan,
-        'report' => ['certificate_count' => count($certificates)],
-    ]);
-})->name('certificates.analyze');
-
-/**
- * ================================================
- * Domain Intelligence: Search Engine OSINT Routes - 2026-09-03
- * ================================================
- */
-Route::get('/search', function () {
-    return view('security.result', [
-        'report' => ['message' => 'Search engine integration coming soon'],
-    ]);
-})->name('search.index');
-
-Route::get('/search/{domain}', function ($domain) {
-    $service = new App\Services\SubdomainDiscoveryService();
-    $subdomains = $service->discoverSubdomains();
-    
-    return view('security.result', [
-        'domain' => $domain,
-        'report' => ['search_count' => count($subdomains)],
-    ]);
-})->name('search.analyze');
-
-/**
- * ================================================
- * Domain Intelligence: Security Headers Routes - 2026-09-03
- * ================================================
- */
-Route::get('/security/headers', function () {
-    return view('security.result', [
-        'report' => ['message' => 'Security headers analysis coming soon'],
-    ]);
-})->name('headers.index');
-
-Route::post('/security/headers/scan/{scan}', function ($scan) {
-    $service = new App\Services\SubdomainDiscoveryService();
-    $scanned = $service->discoverSubdomains();
-    
-    return view('security.result', [
-        'scan' => $scan,
-        'report' => ['header_count' => count($scanned)],
-    ]);
-})->name('headers.analyze');
-
-/**
- * ================================================
- * Domain Intelligence: Redirect Analysis Routes - 2026-09-03
- * ================================================
- */
-Route::get('/redirects', function () {
-    return view('security.result', [
-        'report' => ['message' => 'Redirect analysis coming soon'],
-    ]);
-})->name('redirects.index');
-
-Route::post('/redirects/scan/{scan}', function ($scan) {
-    $service = new App\Services\SubdomainDiscoveryService();
-    $scanned = $service->discoverSubdomains();
-    
-    return view('security.result', [
-        'scan' => $scan,
-        'report' => ['redirect_count' => count($scanned)],
-    ]);
-})->name('redirects.analyze');
-
-/**
- * ================================================
- * Domain Intelligence: Search Engine OSINT Routes - 2026-09-03
- * ================================================
- */
-Route::get('/search', function () {
-    return view('security.result', [
-        'report' => ['message' => 'Search engine integration coming soon'],
-    ]);
-})->name('search.index');
-
-Route::get('/search/{domain}', function ($domain) {
-    $service = new App\Services\SubdomainDiscoveryService();
-    $subdomains = $service->discoverSubdomains();
-    
-    return view('security.result', [
-        'domain' => $domain,
-        'report' => ['search_count' => count($subdomains)],
-    ]);
-})->name('search.analyze');
+Route::get('/domain-intelligence', [DomainIntelligenceController::class, 'index'])->name('domain-intelligence.index');
+Route::post('/domain-intelligence/scan', [DomainIntelligenceController::class, 'scan'])->middleware('throttle:6,1')->name('domain-intelligence.scan');
+Route::get('/domain-intelligence/{scan}', [DomainIntelligenceController::class, 'show'])
+    ->whereNumber('scan')
+    ->name('domain-intelligence.show');
+Route::get('/domain-intelligence/{scan}/export', [DomainIntelligenceController::class, 'export'])
+    ->whereNumber('scan')
+    ->name('domain-intelligence.export');
