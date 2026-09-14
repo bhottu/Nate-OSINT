@@ -6,6 +6,7 @@ use App\Http\Controllers\ReversePhoneOSINTController;
 use App\Http\Controllers\SecurityInspectorController;
 use App\Http\Controllers\SocialAccountCorrelationController;
 use App\Http\Controllers\DomainIntelligenceController;
+use App\Http\Controllers\UsernameHunterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -61,3 +62,12 @@ Route::get('/domain-intelligence/{scan}', [DomainIntelligenceController::class, 
 Route::get('/domain-intelligence/{scan}/export', [DomainIntelligenceController::class, 'export'])
     ->whereNumber('scan')
     ->name('domain-intelligence.export');
+
+/**
+ * ================================================
+ * Username / Social Media Hunter - 2026-09-14
+ * Passive public username lookup across platforms.
+ * ================================================
+ */
+Route::get('/username-hunter', [UsernameHunterController::class, 'index'])->name('username-hunter.index');
+Route::post('/username-hunter/scan', [UsernameHunterController::class, 'scan'])->middleware('throttle:6,1')->name('username-hunter.scan');
