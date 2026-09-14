@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-:root { --paper: #07110c; --ink: #b8ffcf; --coral: #39ff88; --sand: #0d2117; }
+:root { --paper: #ffffff; --ink: #1a1a1a; --coral: #39ff88; --sand: #f5f5f5; }
 @theme inline { --color-paper: var(--paper); --color-ink: var(--ink); --color-coral: var(--coral); --color-sand: var(--sand); --font-display: 'JetBrains Mono', monospace; --font-sans: 'IBM Plex Mono', monospace; }
 @custom-variant dark (&:where(.dark, .dark *));
 
