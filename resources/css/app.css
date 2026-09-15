@@ -9,7 +9,8 @@ body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-i
 ::selection { color: var(--paper); background: var(--coral); }
 @media (prefers-reduced-motion: no-preference) { body { animation: appear .45s ease-out both; } }
 @keyframes appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-.action { @apply rounded-none border border-coral/35 bg-paper/70 px-3 py-2 text-sm font-semibold uppercase tracking-wider text-coral transition hover:-translate-y-0.5 hover:bg-coral hover:text-paper dark:border-coral/35; }
+.action { @apply inline-block rounded-none border border-coral/40 bg-transparent px-4 py-2 text-center font-display text-xs font-semibold uppercase tracking-wider text-ink/70 transition-colors hover:border-coral hover:text-coral dark:text-[#b8ffcf]/70 dark:hover:text-[#b8ffcf]; }
+.action-primary { @apply inline-block rounded-none border border-coral bg-coral px-4 py-2 text-center font-display text-xs font-semibold uppercase tracking-wider text-[#07110c] transition-colors hover:bg-coral/90 disabled:cursor-wait disabled:opacity-70; }
 .brand-credit { font-size: 8px; line-height: 1.2; }
 input, button, label { font-family: inherit; }
 @media print { nav, footer, .action, #map { display: none !important; } body { background: white; color: black; } }

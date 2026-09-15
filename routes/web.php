@@ -7,6 +7,7 @@ use App\Http\Controllers\SecurityInspectorController;
 use App\Http\Controllers\SocialAccountCorrelationController;
 use App\Http\Controllers\DomainIntelligenceController;
 use App\Http\Controllers\UsernameHunterController;
+use App\Http\Controllers\EmailIntelligenceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -71,3 +72,19 @@ Route::get('/domain-intelligence/{scan}/export', [DomainIntelligenceController::
  */
 Route::get('/username-hunter', [UsernameHunterController::class, 'index'])->name('username-hunter.index');
 Route::post('/username-hunter/scan', [UsernameHunterController::class, 'scan'])->middleware('throttle:6,1')->name('username-hunter.scan');
+
+/**
+ * ================================================
+ * Email Intelligence - 2026-09-15
+ * Passive OSINT: public account discovery, technical
+ * email/domain analysis, optional breach exposure.
+ * ================================================
+ */
+Route::get('/email-intelligence', [EmailIntelligenceController::class, 'index'])->name('email-intelligence.index');
+Route::post('/email-intelligence/scan', [EmailIntelligenceController::class, 'scan'])->middleware('throttle:6,1')->name('email-intelligence.scan');
+Route::get('/email-intelligence/{scan}', [EmailIntelligenceController::class, 'show'])
+    ->where('scan', '[A-Za-z0-9]{12}')
+    ->name('email-intelligence.show');
+Route::get('/email-intelligence/{scan}/export', [EmailIntelligenceController::class, 'export'])
+    ->where('scan', '[A-Za-z0-9]{12}')
+    ->name('email-intelligence.export');
