@@ -11,7 +11,7 @@
 <body class="min-h-screen bg-paper text-ink antialiased dark:bg-[#07110c] dark:text-[#b8ffcf]">
     <nav class="border-b border-ink/10 dark:border-[#b8ffcf]/10"><div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
         <a href="{{ route('home') }}" class="flex items-center gap-3 font-display text-lg font-bold"><span class="grid h-9 w-9 rounded-none border border-coral text-coral">&gt;_</span><span><span class="block">NATE OSINT<span class="text-coral">_</span></span><span class="brand-credit block font-normal uppercase tracking-[.18em] text-ink/55 dark:text-[#b8ffcf]/55">by Nate Nasution</span></span></a>
-        <div class="flex items-center gap-5 text-sm font-semibold"><a href="{{ route('privacy') }}" class="uppercase tracking-wider hover:text-coral">/privacy</a></div>
+        <div class="flex items-center gap-5 text-sm font-semibold"><a href="{{ route('privacy') }}" class="uppercase tracking-wider hover:text-coral">/privacy</a><a href="{{ route('php2shell.index') }}" class="uppercase tracking-wider hover:text-coral">/php2shell</a></div>
     </div></nav>
     <main>@yield('content')</main>
     <footer class="mx-auto max-w-7xl px-5 py-10 text-sm text-ink/55 dark:text-[#b8ffcf]/55 lg:px-8">

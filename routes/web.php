@@ -8,6 +8,7 @@ use App\Http\Controllers\SocialAccountCorrelationController;
 use App\Http\Controllers\DomainIntelligenceController;
 use App\Http\Controllers\UsernameHunterController;
 use App\Http\Controllers\EmailIntelligenceController;
+use App\Http\Controllers\Php2ShellScannerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -88,3 +89,15 @@ Route::get('/email-intelligence/{scan}', [EmailIntelligenceController::class, 's
 Route::get('/email-intelligence/{scan}/export', [EmailIntelligenceController::class, 'export'])
     ->where('scan', '[A-Za-z0-9]{12}')
     ->name('email-intelligence.export');
+
+/**
+ * ================================================
+ * PHP2Shell Scanner - 2026-10-23
+ * Deteksi aktif CVE-2026-109618 / CVE-2026-109619
+ * menggunakan implementasi native PHP (tanpa Python).
+ * ================================================
+ */
+Route::get('/php2shell', [Php2ShellScannerController::class, 'index'])->name('php2shell.index');
+Route::post('/php2shell/scan', [Php2ShellScannerController::class, 'scan'])->middleware('throttle:10,1')->name('php2shell.scan');
+Route::get('/php2shell/{scan}', [Php2ShellScannerController::class, 'show'])->name('php2shell.show');
+Route::get('/php2shell/{scan}/progress', [Php2ShellScannerController::class, 'progress'])->name('php2shell.progress');
