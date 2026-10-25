@@ -4,7 +4,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "postinstall": "composer install --no-interaction --optimize-autoloader"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
